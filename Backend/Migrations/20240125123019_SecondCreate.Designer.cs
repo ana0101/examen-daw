@@ -3,6 +3,7 @@ using ExamenDAW.ContextModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamenDAW.Migrations
 {
     [DbContext(typeof(ExamContext))]
-    partial class ExamContextModelSnapshot : ModelSnapshot
+    [Migration("20240125123019_SecondCreate")]
+    partial class SecondCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,17 +63,25 @@ namespace ExamenDAW.Migrations
 
             modelBuilder.Entity("ExamenDAW.Entities.ProfesorMaterie", b =>
                 {
-                    b.Property<int>("ProfesorId")
+                    b.Property<int>("IdProfesor")
                         .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    b.Property<int>("MaterieId")
+                    b.Property<int>("IdMaterie")
                         .HasColumnType("int")
                         .HasColumnOrder(1);
 
-                    b.HasKey("ProfesorId", "MaterieId");
+                    b.Property<int>("MaterieId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProfesorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdProfesor", "IdMaterie");
 
                     b.HasIndex("MaterieId");
+
+                    b.HasIndex("ProfesorId");
 
                     b.ToTable("ProfesoriMaterii");
                 });

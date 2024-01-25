@@ -1,0 +1,19 @@
+<div>
+    <h3>Materii: </h3>
+    <h3 *ngFor="let materie of materii$ | async">
+        <p>ID: {{materie.id}}</p>
+        <p>Denumire: {{materie.denumire}}</p>
+    </h3>
+</div>
+
+<div>
+    <h3>Adauga o materie noua: </h3>
+    <form (ngSubmit)="postMaterie(postMaterieForm)" [formGroup]="postMaterieForm">
+        <div>
+            <label>Denumire: </label>
+            <input formControlName="denumire" />
+        </div>
+
+        <input type="submit" value="Adauga materie">
+    </form>
+</div>

@@ -1,4 +1,5 @@
 using ExamenDAW.ContextModels;
+using ExamenDAW.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,16 +11,21 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
         builder =>
         {
-            builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            builder.WithOrigins("http://localhost:4200")
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
         });
 });
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<ExamContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Exam")));
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddScoped<IProfesoriRepository, ProfesoriRepository>();
+builder.Services.AddScoped<IMateriiRepository, MateriiRepository>();
+builder.Services.AddScoped<IProfesoriMateriiRepository, ProfesoriMateriiRepository>();
 
 var app = builder.Build();
 

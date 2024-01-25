@@ -1,0 +1,24 @@
+<div>
+    <h3>Asignari: </h3>
+    <h3 *ngFor="let profesorMaterie of profesoriMaterii$ | async">
+        <p>ID profesor: {{profesorMaterie.profesorId}}</p>
+        <p>ID materie: {{profesorMaterie.materieId}}</p>
+    </h3>
+</div>
+
+<div>
+    <h3>Adauga o asignare noua: </h3>
+    <form (ngSubmit)="postProfesorMaterie(postProfesorMaterieForm)" [formGroup]="postProfesorMaterieForm">
+        <div>
+            <label>ID profesor: </label>
+            <input formControlName="profesorId" />
+        </div>
+
+        <div>
+            <label>ID materie: </label>
+            <input formControlName="materieId" />
+        </div>
+
+        <input type="submit" value="Adauga asignare">
+    </form>
+</div>
